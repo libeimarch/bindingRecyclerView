@@ -1,0 +1,2 @@
+# bindingRecyclerView
+Easy dataBinding RecyclerView
