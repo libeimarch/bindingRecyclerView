@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">BindingRecyclerView</string>
+    <string name="text_accept">accept</string>
+    <string name="text_continue">continue</string>
+</resources>

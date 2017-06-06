@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="com.afa.code.R" />
+
+        <variable
+            name="task"
+            type="com.afa.code.bean.BTaskBean" />
+
+        <variable
+            name="listener"
+            type="com.afa.code.listener.OnTaskExecuteListener" />
+
+        <import type="me.tatarka.bindingcollectionadapter2.LayoutManagers" />
+
+        <variable
+            name="taskItemBinding"
+            type="me.tatarka.bindingcollectionadapter2.ItemBinding" />
+
+        <import type="android.view.View" />
+
+    </data>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@color/white"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="0dp"
+        app:cardMaxElevation="0dp"
+        app:cardUseCompatPadding="false">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="40dp">
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:layout_width="34dp"
+                    android:layout_height="34dp"
+                    android:scaleType="centerCrop"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    app:stateImage="@{task.taskState}" />
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="@{task.taskTitle}" />
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:text="@{task.taskDateStr}"
+                    android:layout_marginRight="10dp" />
+
+            </RelativeLayout>
+
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:itemBinding="@{taskItemBinding}"
+                app:items="@{task.taskItems}"
+                app:layoutManager="@{LayoutManagers.linear()}" />
+
+            <Button
+                android:layout_width="260dp"
+                android:layout_height="46dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="10dp"
+                android:background="@{task.taskState==0?@drawable/drawer_task_accept:@drawable/drawer_task_continue}"
+                android:gravity="center"
+                android:onClick="@{() -> listener.onExecute(task)}"
+                android:text="@{task.taskState==0?R.string.text_accept:R.string.text_continue}"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
+
+</layout>
+
